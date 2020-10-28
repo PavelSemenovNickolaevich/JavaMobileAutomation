@@ -11,7 +11,14 @@ public class MainClassTest extends MainClass {
 
     @Test
     public void testGetClassNumber() {
-        Assert.assertEquals("Method returns less then 45", getClass_number() > 45);
+        Assert.assertEquals("Method returns less then 45", getClass_number()  <  45, getClass_number());
+
+    }
+
+    @Test
+    public void testGetClassString() {
+        Assert.assertTrue("String doesn't contains 'hello' or 'Hello'", getClassString().contains("Hello")
+                || getClassString().contains("hello"));
     }
 
 }
