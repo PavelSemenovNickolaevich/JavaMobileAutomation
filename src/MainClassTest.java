@@ -11,7 +11,8 @@ public class MainClassTest extends MainClass {
 
     @Test
     public void testGetClassNumber() {
-        Assert.assertEquals("Method returns less then 45", getClass_number()  <  45, getClass_number());
+//        Assert.assertEquals("Method returns less then 45", getClass_number()  >  45, getClass_number());
+        Assert.assertTrue("Method returns less then 45", getClass_number() > 45);
 
     }
 
