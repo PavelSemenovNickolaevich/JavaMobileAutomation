@@ -1,0 +1,14 @@
+lib\ui\NavigationUi.class
+lib\ui\ArticlePageObject.class
+home_work\Lecture4.class
+tests\ChangeAppConditionTests.class
+home_work\Lesson3.class
+lib\ui\MainPageObject.class
+tests\ArticleTests.class
+tests\MyListsTests.class
+suits\TestSuite.class
+FirstTest.class
+lib\ui\SearchPageObject.class
+lib\ui\MyListPageObject.class
+lib\CoreTestCase.class
+tests\SearchTests.class
