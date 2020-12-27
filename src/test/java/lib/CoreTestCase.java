@@ -20,6 +20,7 @@ public class CoreTestCase extends TestCase {
         driver = Platform.getInstance().getDriver();
         this.rotateScreenPortrait();
         this.skipWelcomePageForIOSApp();
+        this.openWikiPageForMobileWeb();
 
     }
 
@@ -64,6 +65,14 @@ public class CoreTestCase extends TestCase {
             WelcomePageObject welcomePageObject = new WelcomePageObject(driver);
             welcomePageObject.clickSkip();
 
+        }
+    }
+
+    protected void openWikiPageForMobileWeb() {
+        if (Platform.getInstance().isMW()) {
+            driver.get("https://en.wikipedia.org/wiki/English_language");
+        } else {
+            System.out.println("Method openWikiPageForMobileWeb()  do nothing platform " + Platform.getInstance().getPlatformVar());
         }
     }
 }

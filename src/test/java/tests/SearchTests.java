@@ -16,10 +16,10 @@ public class SearchTests extends CoreTestCase {
     public void testSearch() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
-        SearchPageObject.skipFirstPage();
+//        SearchPageObject.skipFirstPage();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.waitForSearchResult("bject-oriented programming language");
 
     }
 

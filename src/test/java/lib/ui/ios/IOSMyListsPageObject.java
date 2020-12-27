@@ -2,10 +2,11 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.MyListPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSMyListsPageObject extends MyListPageObject {
 
-    public IOSMyListsPageObject(AppiumDriver driver) {
+    public IOSMyListsPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 // для ios отличный локатор от андроида
