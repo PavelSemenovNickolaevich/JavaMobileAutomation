@@ -1,6 +1,5 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,6 +33,8 @@ abstract public class ArticlePageObject extends MainPageObject {
         WebElement title_element = waitForTitleElement();
         if (Platform.getInstance().isAndroid()) {
             return title_element.getAttribute("text");
+        } else if (Platform.getInstance().isMW()) {
+            return title_element.getText();
         } else {
             return title_element.getAttribute("name");
         }
@@ -42,6 +43,12 @@ abstract public class ArticlePageObject extends MainPageObject {
     public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(
+                    FOOTER_ELEMENT,
+                    "Cannot find the end of article",
+                    40
+            );
+        } else if (Platform.getInstance().isMW()) {
+            this.scrollWebPageTitleElementNotVisible(
                     FOOTER_ELEMENT,
                     "Cannot find the end of article",
                     40
@@ -153,7 +160,7 @@ abstract public class ArticlePageObject extends MainPageObject {
     }
 
     public void addArticlesTiMySaved() {
-        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5 );
+        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
     }
 
 

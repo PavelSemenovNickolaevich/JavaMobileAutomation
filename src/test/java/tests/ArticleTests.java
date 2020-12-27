@@ -1,14 +1,12 @@
 package tests;
 
-import io.appium.java_client.AppiumDriver;
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.ArticlePageObject;
-import lib.ui.MainPageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
-
 
 
 public class ArticleTests extends CoreTestCase {
@@ -18,10 +16,12 @@ public class ArticleTests extends CoreTestCase {
     public void testCompareArticleTitle() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
-        SearchPageObject.skipFirstPage();
+        if (!Platform.getInstance().isMW()) {
+            SearchPageObject.skipFirstPage();
+        }
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
@@ -38,10 +38,12 @@ public class ArticleTests extends CoreTestCase {
     public void testSwipeArticle() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
-        SearchPageObject.skipFirstPage();
+        if (!Platform.getInstance().isMW()) {
+            SearchPageObject.skipFirstPage();
+        }
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
