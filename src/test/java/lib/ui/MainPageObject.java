@@ -121,8 +121,8 @@ public class MainPageObject {
 
     public boolean isElementLocatedOnTheScreen(String locator) {
         int element_location_by_y = this.waitForElementPresent(locator, "Cannot find by locator", 1).getLocation().getY();
-        if(Platform.getInstance().isMW()) {
-            JavascriptExecutor JSExecutor = (JavascriptExecutor)driver;
+        if (Platform.getInstance().isMW()) {
+            JavascriptExecutor JSExecutor = (JavascriptExecutor) driver;
             Object js_result = JSExecutor.executeScript("return window.pageXOffset");
             element_location_by_y -= Integer.parseInt(js_result.toString());
         }
@@ -155,16 +155,17 @@ public class MainPageObject {
         }
     }
 
-    public int getAmountOfElements(By by) {
+    public int getAmountOfElements(String locator) {
+        By by = this.getLocatorByString(locator);
         List elements = driver.findElements(by);
         return elements.size();
 
     }
 
-    public void assetElementNotPresent(By by, String error_message) {
-        int amount_of_elements = getAmountOfElements(by);
+    public void assetElementNotPresent(String locator, String error_message) {
+        int amount_of_elements = getAmountOfElements(locator);
         if (amount_of_elements > 0) {
-            String default_message = "An element ' " + by.toString() + " ' supposed to be not present";
+            String default_message = "An element ' " + locator + " ' supposed to be not present";
             throw new AssertionError(default_message + " " + error_message);
         }
     }
@@ -254,6 +255,22 @@ public class MainPageObject {
         }
     }
 
+    public void tryClickElementWithFewAttempts(String locator, String error_message, int amount_of_attempts) {
+        int current_attempts = 0;
+        boolean need_more_attempts = true;
+
+        while (need_more_attempts) {
+            try {
+                this.waitForElementAndClick(locator, error_message, 1);
+                need_more_attempts = false;
+            } catch (Exception e) {
+                if (current_attempts > amount_of_attempts) {
+                    this.waitForElementAndClick(locator, error_message, 1);
+                }
+            }
+            ++current_attempts;
+        }
+    }
 
 }
 

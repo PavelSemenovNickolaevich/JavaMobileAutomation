@@ -86,7 +86,7 @@ public abstract class SearchPageObject extends MainPageObject {
                 "Cannot find anything by the request  ",
                 15
         );
-        return this.getAmountOfElements(By.xpath(SEARCH_RESULT_ELEMENT));
+        return this.getAmountOfElements(SEARCH_RESULT_ELEMENT);
 
 //        int amount_of_search_results = MainPageObject.getAmountOfElements(
 //                By.xpath("//*[@text='Linkin Park discography']")
@@ -99,7 +99,7 @@ public abstract class SearchPageObject extends MainPageObject {
     }
 
     public void assertThereIsNoResultsOfSearch() {
-        this.assetElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT), "We supposed not find any results");
+        this.assetElementNotPresent(SEARCH_RESULT_ELEMENT, "We supposed not find any results");
     }
 
     public List getTitlesList() {
