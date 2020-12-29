@@ -13,5 +13,6 @@ public class MVMyListsPageObject extends MyListPageObject {
 
         ARTICLE_BY_TITLE_TPL = "xpath://ul[contains(@class,'mw-mf-watchlist-page-list')]//h3[contains(text(),'{TITLE}')]";
         REMOVE_FROM_SAVED_BUTTON = "xpath://ul[contains(@class,'mw-mf-watchlist-page-list')]//h3[contains(text(),'{TITLE}')]/../../a[contains(@class,'watched')]";
+        DATA_ID = "xpath://li[contains(@data-id,'9845')]";
     }
 }

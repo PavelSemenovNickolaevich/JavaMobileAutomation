@@ -1,7 +1,5 @@
 package lib.ui;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -10,7 +8,8 @@ abstract public class MyListPageObject extends MainPageObject {
     protected static String
             FOLDER_BY_NAME_TPL,
             ARTICLE_BY_TITLE_TPL,
-            REMOVE_FROM_SAVED_BUTTON;
+            REMOVE_FROM_SAVED_BUTTON,
+            DATA_ID;
 
     private static String getFolderXpathByName(String name_of_folder) {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -23,6 +22,10 @@ abstract public class MyListPageObject extends MainPageObject {
     private static String getRemovedButtonByTitle(String article_title) {
         return REMOVE_FROM_SAVED_BUTTON.replace("{TITLE}", article_title);
     }
+
+//    private static String getDataId(String article_title) {
+//        return DATA_ID.replace("{DATA_ID}", article_title);
+//    }
 
     public MyListPageObject(RemoteWebDriver driver) {
         super(driver);
@@ -51,12 +54,12 @@ abstract public class MyListPageObject extends MainPageObject {
         this.waitForArticleToDAppearByTitle(article_title);
         String article_xpath = getSavedArticleXpathByTitle(article_title);
 
-        if(Platform.getInstance().isAndroid() || Platform.getInstance().isAndroid()) {
+        if (Platform.getInstance().isAndroid() || Platform.getInstance().isAndroid()) {
             this.swipeElementToLeft(
                     article_xpath,
                     "Cannot find saved article"
             );
-        } else  {
+        } else {
             String remove_locator = getRemovedButtonByTitle(article_title);
             this.waitForElementAndClick(
                     remove_locator,
@@ -68,10 +71,18 @@ abstract public class MyListPageObject extends MainPageObject {
             this.clickElementToTheRightUpperCorner(article_xpath, "cannot find saved article");
 
         }
-        if(Platform.getInstance().isMW()) {
+        if (Platform.getInstance().isMW()) {
             driver.navigate().refresh();
         }
         this.waitForArticleToDisappearByTitle(article_title);
+    }
+
+    public void assertArticleExistsID() {
+        this.waitForElementAndClick(
+                DATA_ID,
+                "9845",
+                5
+        );
     }
 
 }

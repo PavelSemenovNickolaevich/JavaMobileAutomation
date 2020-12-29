@@ -7,6 +7,7 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class Lecture4 extends CoreTestCase {
@@ -15,6 +16,8 @@ public class Lecture4 extends CoreTestCase {
     private static final String
             login = "SemenovPavelNickolaevich",
             password = "Rjcvjltcfyn1987-";
+
+//    private static final String DATA_ID = "xpath//li[contains(@data-id,'9845')]";
 
 
     @Test
@@ -74,7 +77,9 @@ public class Lecture4 extends CoreTestCase {
         //  MyListPageObject.openFolderByName(name_of_folder);
         MyListPageObject.swipeByArticleToDelete(article_title);
         Thread.sleep(1000);
-        ArticlePageObject.assertArticleExists();
+       // ArticlePageObject.assertArticleExists();
+//        Assert.assertEquals(DATA_ID, 9845);
+        MyListPageObject.assertArticleExistsID();
 
 
     }
