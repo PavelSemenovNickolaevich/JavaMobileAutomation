@@ -7,7 +7,6 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class Lecture4 extends CoreTestCase {
@@ -29,7 +28,7 @@ public class Lecture4 extends CoreTestCase {
         }
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
@@ -57,31 +56,39 @@ public class Lecture4 extends CoreTestCase {
             SearchPageObject.typeSearchLine("Java");
             SearchPageObject.clickByArticleWithSubstring("High-level programming language");
             ArticlePageObject.addArticlesTiMySaved();
+        } else {
+            ArticlePageObject.addArticleToMyList(name_of_folder);
+            ArticlePageObject.closeArticleOneClick();
+            SearchPageObject.clickByArticleWithSubstring("High-level programming language");
+            ArticlePageObject.addSecondArticleToMyList();
         }
-//        ArticlePageObject.addArticleToMyList(name_of_folder);
-//        ArticlePageObject.closeArticleOneClick();
-//        SearchPageObject.clickByArticleWithSubstring("High-level programming language");
-//        ArticlePageObject.addSecondArticleToMyList();
         ArticlePageObject.closeArticle();
 
         NavigationUi NavigationUi = NavigationUIFactory.get(driver);
         NavigationUi.openNavigation();
+        if (!Platform.getInstance().isMW()) {
+            NavigationUi.clickBackButton();
+        }
         NavigationUi.ClickMyLists();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
 //        NavigationUi NavigationUi = NavigationUIFactory.get(driver);
 //        NavigationUi.clickBackButton();
 //        NavigationUi.ClickMyLists();
 //
         MyListPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
+        if (!Platform.getInstance().isMW()) {
+            MyListPageObject.openFolderByName(name_of_folder);
+        }
         //  MyListPageObject.openFolderByName(name_of_folder);
         MyListPageObject.swipeByArticleToDelete(article_title);
-        Thread.sleep(1000);
-       // ArticlePageObject.assertArticleExists();
-//        Assert.assertEquals(DATA_ID, 9845);
-        MyListPageObject.assertArticleExistsID();
-
-
+        Thread.sleep(5000);
+        // ArticlePageObject.assertArticleExists();
+        if (Platform.getInstance().isMW()) {
+            MyListPageObject.assertArticleExistsID();
+        } else {
+            ArticlePageObject.assertArticleExists();
+        }
     }
 
     @Test
